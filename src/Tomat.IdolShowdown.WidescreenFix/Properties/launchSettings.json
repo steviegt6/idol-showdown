@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+        "Idol Showdown (Client)": {
+            "commandName": "Executable",
+            "executablePath": "$(GameRunPath)",
+            "commandLineArgs": "$(DoorstopArguments)",
+            "workingDirectory": "$(GamePath)"
+        }
+    }
+}

@@ -50,6 +50,8 @@ public sealed class AssemblyPublicizerTask : VoidTask {
     public string[] OutputAssemblyPaths { get; set; } = Array.Empty<string>();
 
     protected override bool Execute(VoidContext ctx) {
+        GameAssemblyDirectory = GameAssemblyDirectory.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
+
         Log.LogMessage($"Using project directory: {ProjectDirectory}");
         Log.LogEnumerable(
             "Using the following assemblies to publicize: ",
@@ -57,6 +59,7 @@ public sealed class AssemblyPublicizerTask : VoidTask {
             AssembliesToPublicize
         );
         Log.LogMessage($"Publicizing game assemblies: {PublicizeGameAssemblies}");
+        Log.LogMessage($"Using game assembly directory: {GameAssemblyDirectory}");
 
         var assemblyCacheDir = Path.Combine(ProjectDirectory, VoidPaths.ASSEMBLY_CACHE_DIR);
         Directory.CreateDirectory(assemblyCacheDir);
@@ -135,7 +138,7 @@ public sealed class AssemblyPublicizerTask : VoidTask {
             // TODO: Some system assemblies really shouldn't be publicized. lol
             var name = Path.GetFileNameWithoutExtension(assemblyPath);
 
-            if (PublicizeGameAssemblies == "enable" && !name.Contains("System") && !name.Contains("netstandard") && !name.Contains("mscorlib") && name.StartsWith(GameAssemblyDirectory)) {
+            if (PublicizeGameAssemblies == "enable" && !name.Contains("System") && !name.Contains("netstandard") && !name.Contains("mscorlib") && assemblyPath.StartsWith(GameAssemblyDirectory)) {
                 Log.LogMessage($"Assembly '{name}' is a game assembly; publicizing.");
                 settings = AssemblyCacheSettings.Publicized;
             }
