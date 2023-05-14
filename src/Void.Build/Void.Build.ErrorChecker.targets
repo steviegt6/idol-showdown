@@ -1,0 +1,38 @@
+<!--
+    Copyright (C) 2023 Tomat & Contributors
+    
+    Licensed under the GNU Lesser General Public License, version 2.1; you may
+    not use this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+    for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Project>
+
+    <Target Name="DisplayErrors" BeforeTargets="Build">
+        <!-- Check for invalid configuration options. -->
+        <Error Text="Invalid option '$(VoidImportReferences)' for VoidImportReferences; must be 'enable', 'disable'" Condition="$(VoidImportReferences) != 'enable' AND $(VoidImportReferences) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidPublicizeAssemblies)' for VoidPublicizeAssemblies; must be 'enable', 'disable'" Condition="$(VoidPublicizeAssemblies) != 'enable' AND $(VoidPublicizeAssemblies) != 'disable'"/>
+        <Error Text="Invalid option '$(PublicizeGameAssemblies)' for PublicizeGameAssemblies; must be 'enable', 'disable'" Condition="$(PublicizeGameAssemblies) != 'enable' AND $(PublicizeGameAssemblies) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidGameRunner)' for VoidGameRunner; must be 'enable', 'disable'" Condition="$(VoidGameRunner) != 'enable' AND $(VoidGameRunner) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidBepInExProjectType)' for VoidBepInExProjectType; must be 'plugin', 'patcher'" Condition="$(VoidBepInExProjectType) != 'plugin' AND $(VoidBepInExProjectType) != 'patcher'"/>
+        <Error Text="Invalid option '$(VoidModManager)' for VoidModManager; must be 'none', 'r2modman'" Condition="$(VoidModManager) != 'none' AND $(VoidModManager) != 'r2modman'"/>
+        <Error Text="Invalid option '$(VoidMonoDebug)' for VoidMonoDebug; must be 'enable', 'disable'" Condition="$(VoidMonoDebug) != 'enable' AND $(VoidMonoDebug) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidMonoDebugWait)' for VoidMonoDebugWait; must be 'enable', 'disable'" Condition="$(VoidMonoDebugWait) != 'enable' AND $(VoidMonoDebugWait) != 'disable'"/>
+
+        <!-- Check for invalid paths. -->
+        <Error Text="BepInExPath not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(BepInExPath) == ''"/>
+        <Error Text="ModAssemblyDirectory not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(ModAssemblyDirectory) == ''"/>
+        <!--<Error Text="Invalid path '$(BepInExPath)' for BepInExPath; report this!" Condition="!Exists('$(BepInExPath)')" />-->
+
+        <!-- Check for missing tasks. -->
+        <Error Text="Failed to import AssemblyPublicizerTask; assembly: '$(AssemblyPublicizerTaskAssembly)'. The task assembly was not propertly configured, report this!" Condition="$(AssemblyPublicizerTaskAssembly) == ''"/>
+    </Target>
+
+</Project>

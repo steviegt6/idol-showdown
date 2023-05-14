@@ -1,0 +1,133 @@
+<!--
+    Copyright (C) 2023 Tomat & Contributors
+    
+    Licensed under the GNU Lesser General Public License, version 2.1; you may
+    not use this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+    for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Project>
+
+    <!-- There are various configuration options you can use, both as properties
+         in MSBuild and environment variables. They are as follows:
+           VOID_ROR2_GAME_PATH: Determines the game path to use, overrides
+                                what the default, resolved path would be. See
+                                Void.Build.GameReferences.Targets for more.
+                                Default: environment variable, N/A
+
+           VoidImportReferences: 'enable' to allow Void.Build to import
+                                 local assembly references, otherwise false.
+                                 Default: 'enable'
+                                 Values: 'enable', 'disable'
+
+           VoidPublicizeAssemblies: 'enable' to allow Void.Build to publicize
+                                    local assembly references, otherwise false.
+                                    Default: 'enable'
+                                    Values: 'enable', 'disable'
+
+           PublicAssemblies: A list of assemblies to publicize if the
+                             VoidPublicizeAssemblies property is set to
+                             'enable'. This is a semicolon-separated list.
+                             Default: ''
+                             Values: any
+
+           PublicizeGameAssemblies: 'enable' to publicize all game assemblies
+                                    if the VoidPublicizeAssemblies property is
+                                    set to 'enable'.
+                                    Default: 'enable'
+                                    Values: 'enable', 'disable'
+
+           VoidGameRunner: 'enable' sets StartAction, StartProgram, and 
+                           StartWorkingDirectory accordingly to start the game.
+                           Currently only supported on Windows, you should
+                           contribute!
+                           Default: 'enable'
+                           Values: 'enable', 'disable'
+
+           VoidBepInExProjectType: 'plugin' or 'patcher', determines the install
+                                   directory for a BepInEx plugin. Impacts what
+                                   directory the mod is built to.
+                                   Default: 'plugin'
+                                   Values: 'plugin', 'patcher'
+
+           VOID_ROR2_MOD_MANAGER: Environment variable that overrides the
+                                  VoidModManager property. See below for more.
+                                  Default: environment variable, N/A
+
+           VoidModManager: The mod manager to use, determines what output path
+                           should be used. 'none' for no manager, 'r2modman' for
+                           r2modman. TODO: Support other managers.
+                           Default: 'none'
+                           Values: 'none', 'r2modman'
+
+           VOID_ROR2_MOD_MANAGER_PROFILE: Environment variable that overrides
+                                  the VoidModManagerProfile property. See below
+                                  for more.
+                                  Default: environment variable, N/A
+
+           VoidModManagerProfile: The mod manager profile to use, if applicable.
+                                  Default: ''
+                                  Values: any
+                                  
+           VOID_ROR2_OUTPUT_DIRECTORY: Environment variable that overrides the
+                                       calculated output path for building.
+                                       Default: environment variable, N/A
+
+           VoidMonoDebug: Determines whether UnityDoorstop should launch the
+                          Mono debug server.
+                          Default: 'disable', overruled if the current
+                                   configuration is "Debug"
+                          Values: 'enable', 'disable'
+
+           VoidMonoDebugPort: The port to use for the Mono debug server.
+                              Default: 10000
+                              Values: any
+
+           VoidMonoDebugWait: Determines whether UnityDoorstop should wait for
+                              the Mono debug server to start before launching
+                              the game.
+                              Default: 'disable'
+                              Values: 'enable', 'disable' -->
+
+    <PropertyGroup>
+        <VoidImportReferences Condition="$(VoidImportReferences) == ''">enable</VoidImportReferences>
+        <VoidPublicizeAssemblies Condition="$(VoidPublicizeAssemblies) == ''">enable</VoidPublicizeAssemblies>
+        <PublicizeGameAssemblies Condition="$(PublicizeGameAssemblies) == ''">enable</PublicizeGameAssemblies>
+        <VoidGameRunner Condition="$(VoidGameRunner) == ''">enable</VoidGameRunner>
+        <VoidModManager Condition="$(VoidModManager) == ''">none</VoidModManager>
+        <VoidBepInExProjectType Condition="$(VoidBepInExProjectType) == ''">plugin</VoidBepInExProjectType>
+        <VoidMonoDebug Condition="$(VoidMonoDebug) == ''">disable</VoidMonoDebug>
+        <VoidMonoDebugPort Condition="$(VoidMonoDebugPort) == ''">10000</VoidMonoDebugPort>
+        <VoidMonoDebugWait Condition="$(VoidMonoDebugWait) == ''">disable</VoidMonoDebugWait>
+    </PropertyGroup>
+
+    <Import Project="Void.Build.Tasks.targets"/>
+    <Import Project="Void.Build.GamePath.targets"/>
+    <Import Project="Void.Build.ModManagerPaths.targets"/>
+    <Import Project="Void.Build.GameReferences.targets"/>
+    <Import Project="Void.Build.GameRunner.targets"/>
+    <Import Project="Void.Build.OutputDeterminer.targets"/>
+    <Import Project="Void.Build.RedirectNuGet.targets"/>
+    <Import Project="Void.Build.ErrorChecker.targets"/>
+
+    <PropertyGroup>
+        <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+        <DebugSymbols>true</DebugSymbols>
+        <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+
+        <OutDir Condition="'$(ModAssemblyDirectory)' != '' And !HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)/</OutDir>
+        <OutDir Condition="'$(ModAssemblyDirectory)' != '' And HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)</OutDir>
+
+        <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+</Project>

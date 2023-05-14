@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Void.Build", "Void.Build", "{00700012-7029-4E7F-9C5F-634497166150}"
+	ProjectSection(SolutionItems) = preProject
+		Void.Build\Void.Build.ErrorChecker.targets = Void.Build\Void.Build.ErrorChecker.targets
+		Void.Build\Void.Build.GamePath.targets = Void.Build\Void.Build.GamePath.targets
+		Void.Build\Void.Build.GameReferences.targets = Void.Build\Void.Build.GameReferences.targets
+		Void.Build\Void.Build.GameRunner.targets = Void.Build\Void.Build.GameRunner.targets
+		Void.Build\Void.Build.ModManagerPaths.targets = Void.Build\Void.Build.ModManagerPaths.targets
+		Void.Build\Void.Build.OutputDeterminer.targets = Void.Build\Void.Build.OutputDeterminer.targets
+		Void.Build\Void.Build.RedirectNuGet.targets = Void.Build\Void.Build.RedirectNuGet.targets
+		Void.Build\Void.Build.targets = Void.Build\Void.Build.targets
+		Void.Build\Void.Build.Tasks.targets = Void.Build\Void.Build.Tasks.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.LocalPublish", "Void.Build.LocalPublish\Void.Build.LocalPublish.csproj", "{A0BF93DF-B719-4A89-95FE-16F0217CC57F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet", "Void.Build.NuGet\Void.Build.NuGet.csproj", "{8537C8E1-282F-475E-B2D6-8A4E322F754D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Analyzers.Generator", "Void.Build.NuGet.Analyzers.Generator\Void.Build.NuGet.Analyzers.Generator.csproj", "{CBC46B72-953F-4C19-A606-9CDAFB022769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Analyzers.Shared", "Void.Build.NuGet.Analyzers.Shared\Void.Build.NuGet.Analyzers.Shared.csproj", "{94110B76-BB64-4542-B08F-07FAF6BDB6A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.AssemblyPublicizer", "Void.Build.NuGet.AssemblyPublicizer\Void.Build.NuGet.AssemblyPublicizer.csproj", "{5A463F71-46DA-40B9-AE0A-ED84F2A54E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Shared", "Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj", "{E9F57F59-F250-4E79-A824-4A60C2879ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.IdolShowdown.Platforms", "Tomat.IdolShowdown.Platforms\Tomat.IdolShowdown.Platforms.csproj", "{14ED3CCA-0938-4599-984F-5013B5A50B1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0BF93DF-B719-4A89-95FE-16F0217CC57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0BF93DF-B719-4A89-95FE-16F0217CC57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0BF93DF-B719-4A89-95FE-16F0217CC57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0BF93DF-B719-4A89-95FE-16F0217CC57F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8537C8E1-282F-475E-B2D6-8A4E322F754D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8537C8E1-282F-475E-B2D6-8A4E322F754D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8537C8E1-282F-475E-B2D6-8A4E322F754D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8537C8E1-282F-475E-B2D6-8A4E322F754D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC46B72-953F-4C19-A606-9CDAFB022769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC46B72-953F-4C19-A606-9CDAFB022769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC46B72-953F-4C19-A606-9CDAFB022769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC46B72-953F-4C19-A606-9CDAFB022769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94110B76-BB64-4542-B08F-07FAF6BDB6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94110B76-BB64-4542-B08F-07FAF6BDB6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94110B76-BB64-4542-B08F-07FAF6BDB6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94110B76-BB64-4542-B08F-07FAF6BDB6A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A463F71-46DA-40B9-AE0A-ED84F2A54E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A463F71-46DA-40B9-AE0A-ED84F2A54E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A463F71-46DA-40B9-AE0A-ED84F2A54E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A463F71-46DA-40B9-AE0A-ED84F2A54E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F57F59-F250-4E79-A824-4A60C2879ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F57F59-F250-4E79-A824-4A60C2879ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F57F59-F250-4E79-A824-4A60C2879ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F57F59-F250-4E79-A824-4A60C2879ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14ED3CCA-0938-4599-984F-5013B5A50B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14ED3CCA-0938-4599-984F-5013B5A50B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14ED3CCA-0938-4599-984F-5013B5A50B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14ED3CCA-0938-4599-984F-5013B5A50B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

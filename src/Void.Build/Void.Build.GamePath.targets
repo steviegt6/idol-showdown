@@ -1,0 +1,72 @@
+<!--
+    Copyright (C) 2023 Tomat & Contributors
+    Copyright (C) 2023 Tomat & Contributors
+    
+    Licensed under the GNU Lesser General Public License, version 2.1; you may
+    not use this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+    for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!--
+    Logic taken and adpted from in accordance to the GNU LGPL, version 3
+    (SMAPI's ModBuildConfig is licensed under MIT, but this file lies within a
+    separate folder assumed subject to GNU LGPL, version 3):
+    https://github.com/Pathoschild/SMAPI/blob/develop/build/find-game-folder.targets
+-->
+<Project>
+
+    <!-- Firstly define GamePath as the high-proprity environment variable. -->
+    <PropertyGroup>
+        <!-- Set GamePath to the custom VOID_ROR2_GAME_PATH environment variable
+             if has been defined. This is for people using non-standard game
+             paths or cases in which the auto-detection fails and needs to be
+             updated. -->
+        <GamePath Condition="$(VOID_ROR2_GAME_PATH) != ''">
+            $(VOID_ROR2_GAME_PATH)
+        </GamePath>
+    </PropertyGroup>
+
+    <!-- Then, if not present, define GamePath based on a variaty of
+         auto-detectable paths. -->
+    <Choose>
+        <!-- Linux and macOS -->
+        <When Condition="$(OS) == 'Unix' OR $(OS) == 'OSX'">
+            <PropertyGroup>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.steam/steam/steamapps/common/Idol Showdown</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.local/share/Steam/steamapps/common/Idol Showdown</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common/Idol Showdown</GamePath>
+
+                <GamePath Condition="!Exists('$(GamePath)')">/Applications/Idol Showdown.app/Contents/MacOS</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/Library/Application Support/Steam/steamapps/common/Idol Showdown/Contents/MacOS</GamePath>
+            </PropertyGroup>
+        </When>
+
+        <!-- Windows -->
+        <When Condition="$(OS) == 'Windows_NT'">
+            <PropertyGroup>
+                <GamePath Condition="!Exists('$(GamePath)')">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1742020', 'InstallLocation', null, RegistryView.Registry64, RegistryView.Registry32))</GamePath>
+
+                <!-- derive from Steam library path -->
+                <_SteamLibraryPath>$([MSBuild]::GetRegistryValueFromView('HKEY_CURRENT_USER\SOFTWARE\Valve\Steam', 'SteamPath', null, RegistryView.Registry32))</_SteamLibraryPath>
+                <GamePath Condition="!Exists('$(GamePath)') AND '$(_SteamLibraryPath)' != ''">$(_SteamLibraryPath)\steamapps\common\Idol Showdown</GamePath>
+
+                <GamePath Condition="!Exists('$(GamePath)')">C:\Program Files\Steam\steamapps\common\Idol Showdown</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">C:\Program Files (x86)\Steam\steamapps\common\Idol Showdown</GamePath>
+            </PropertyGroup>
+        </When>
+    </Choose>
+
+    <!-- TODO: Cross-OS support. -->
+    <!-- Defines GameRunPath for actually launching the game. -->
+    <PropertyGroup>
+        <GameRunPath>$(GamePath)/Idol Showdown.exe</GameRunPath>
+    </PropertyGroup>
+
+</Project>

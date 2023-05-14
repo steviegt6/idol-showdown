@@ -1,0 +1,11 @@
+.idea/
+.vs/
+.vscode/
+.void/
+
+bin/
+obj/
+
+nuget/
+
+*.user
